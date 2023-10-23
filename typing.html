@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <title>Titulek</title>
+ 
+    <style>
+        .text {
+            position: absolute;
+            font-size: 5vw;
+            left: 30%;
+            color: rgb(0, 0, 0);
+        }
+ 
+    </style>
+
+    <body id="body">
+        <div id="main" class="text">a</div>
+
+    </body>
+ 
+    <script>
+        const Letters = "abcdefghijklmnopqrstuvwxyz(){}[],.+=-*`;";
+        var letter;
+        var IRunning = false;
+        var Previous = null;
+
+        round();
+
+        document.addEventListener("keypress", e => {
+            if(e.key.toLowerCase() != letter) {
+                if(IRunning) return;
+                IRunning = true;
+
+                document.getElementById("main").style.color = "rgb(255, 0, 0)";
+                var r = 255;
+                var Interval = setInterval(() => {
+                    r -= 50;
+                    if(r < 0 || !IRunning) {
+                        r = 0;
+                        clearInterval(Interval)
+                        document.getElementById("main").style.color = "rgb(0, 0, 0)";
+                        IRunning = false;
+                    }
+                    document.getElementById("main").style.color = `rgb(${r}, 0, 0)`;
+                }, 100);
+            }
+            else {
+                Previous = letter;
+                round();
+                IRunning = false;
+            }
+        });
+
+        function round() {
+            letter = PickLetter(Letters);
+            document.getElementById("main").innerHTML = letter;
+        }
+
+        function PickLetter() {
+            var letter = Letters[Math.floor(Math.random() * Letters.length)];
+            if(letter == Previous) var letter = Letters[Math.floor(Math.random() * Letters.length)];
+            return letter;
+        }
+
+    </script>
+</head>
+
+</html>
+
