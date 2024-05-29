@@ -67,7 +67,4 @@ var sorted = quickSort(array);
 var now = performance.now();
 
 console.log(Math.floor((now - then)) + "ms")
-
-for (let i = 0; i < sorted.length; i++) {
-    console.log(sorted[i])  
-}
+console.log(sorted)
